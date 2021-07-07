@@ -12,11 +12,17 @@ const io = require('socket.io')(server)
 io.on('connection', (socket) => {
     if(password != "" && sentPassword != password){
     socket.to(socket.id).emit('sentPassword', true)
-    socket.on('sentPassword', function(){
-        sentPassword = password
+    socket.on('sentPassword', function(pass){
+        if(password == pass){
+            socket.to(socket.id).emit('authenticated', true)
+        } else{
+            socket.to(socket.id).emit('authenticated', false)
+        }
     })
+} else{
+    socket.to(socket.id).emit('sentPassword', false)
 }
-    if(sentPassword == password || password != ""){
+    if(sentPassword == password || password == ""){
     console.log('New connection!')
     socket.on('mouseMovement', function(data){
         socket.broadcast.emit('mouseMovement', data)
