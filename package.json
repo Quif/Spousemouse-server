@@ -1,0 +1,28 @@
+{
+  "name": "spousemouse-server",
+  "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Quif/Spousemouse-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Quif/Spousemouse-server/issues"
+  },
+  "homepage": "https://github.com/Quif/Spousemouse-server#readme",
+  "dependencies": {
+    "socket.io": "4.1.2",
+    "http": "0.0.1-security",
+    "express": "4.17.1"
+  }
+  
+}
