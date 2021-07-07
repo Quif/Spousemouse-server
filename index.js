@@ -23,7 +23,7 @@ io.on("connection", (socket) => {
     for (var i = 0; i < connections.length; i++) {
       if (
         connections[i][1] == connections[connections.length - 1][1] &&
-        connections[i][0] != roomID
+        connections[i][0] != socket.id
       ) {
         socket.broadcast.emit("mouseMovement", data);
         socket.broadcast.emit("movementAlert");
@@ -36,7 +36,7 @@ io.on("connection", (socket) => {
     for (var i = 0; i < connections.length; i++) {
       if (
         connections[i][1] == connections[connections.length - 1][1] &&
-        connections[i][0] != roomID
+        connections[i][0] != socket.id
       ) {
         socket.broadcast.emit("wave");
       }
@@ -47,21 +47,19 @@ io.on("connection", (socket) => {
     for (var i = 0; i < connections.length; i++) {
       if (
         connections[i][1] == connections[connections.length - 1][1] &&
-        connections[i][0] != roomID
+        connections[i][0] != socket.id
       ) {
         console.log("disconnected");
       }
     }
   });
-  setTimeout(function(){
   for (var i = 0; i < connections.length; i++) {
     console.log(connections);
     if (
       connections[i][1] == connections[connections.length - 1][1] &&
-      connections[i][0] != roomID
+      connections[i][0] != socket.id
     ) {
       socket.to(connections[i][0]).emit("online");
     }
   }
-},200)
 });
