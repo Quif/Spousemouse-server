@@ -15,6 +15,7 @@ io.on("connection", (socket) => {
   console.log("New connection!");
   socket.on("roomID", function (ID) {
     roomID = ID;
+    console.log(ID)
     connections.push([socket.id, ID]);
   });
 
@@ -22,7 +23,7 @@ io.on("connection", (socket) => {
     for (var i = 0; i < connections.length; i++) {
       if (
         connections[i][1] == connections[connections.length - 1][1] &&
-        connections[i][0] != connections[connections.length - 1][0]
+        connections[i][0] != roomID
       ) {
         socket.broadcast.emit("mouseMovement", data);
         socket.broadcast.emit("movementAlert");
@@ -35,7 +36,7 @@ io.on("connection", (socket) => {
     for (var i = 0; i < connections.length; i++) {
       if (
         connections[i][1] == connections[connections.length - 1][1] &&
-        connections[i][0] != connections[connections.length - 1][0]
+        connections[i][0] != roomID
       ) {
         socket.broadcast.emit("wave");
       }
@@ -46,7 +47,7 @@ io.on("connection", (socket) => {
     for (var i = 0; i < connections.length; i++) {
       if (
         connections[i][1] == connections[connections.length - 1][1] &&
-        connections[i][0] != connections[connections.length - 1][0]
+        connections[i][0] != roomID
       ) {
         console.log("disconnected");
       }
@@ -57,7 +58,7 @@ io.on("connection", (socket) => {
     console.log(connections);
     if (
       connections[i][1] == connections[connections.length - 1][1] &&
-      connections[i][0] != connections[connections.length - 1][0]
+      connections[i][0] != roomID
     ) {
       socket.to(connections[i][0]).emit("online");
     }
