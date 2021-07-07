@@ -14,9 +14,9 @@ io.on('connection', (socket) => {
     io.to(socket.id).emit('sentPassword', true)
     socket.on('sentPassword', function(pass){
         if(password == pass){
-            socket.to(socket.id).emit('authenticated', true)
+            io.to(socket.id).emit('authenticated', true)
         } else{
-            socket.to(socket.id).emit('authenticated', false)
+            io.to(socket.id).emit('authenticated', false)
         }
     })
 } else{
