@@ -11,7 +11,7 @@ var sentPassword;
 const io = require('socket.io')(server)
 io.on('connection', (socket) => {
     if(password != "" && sentPassword != password){
-    socket.to(socket.id).emit('sentPassword', true)
+    io.to(socket.id).emit('sentPassword', true)
     socket.on('sentPassword', function(pass){
         if(password == pass){
             socket.to(socket.id).emit('authenticated', true)
