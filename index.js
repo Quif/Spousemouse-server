@@ -14,6 +14,7 @@ io.on('connection', (socket) => {
     socket.on('roomID', function(ID){
         roomID = ID
         connections.push([socket.id, ID])
+        console.log(connections)
     })
     socket.on('mouseMovement', function(data){
         connections.forEach(user => function(){
