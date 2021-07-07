@@ -16,7 +16,7 @@ io.on('connection', (socket) => {
         sentPassword = password
     })
 }
-    if(sentPassword == password){
+    if(sentPassword == password || password != ""){
     console.log('New connection!')
     socket.on('mouseMovement', function(data){
         socket.broadcast.emit('mouseMovement', data)
