@@ -1,6 +1,6 @@
 // SETTINGS
 var port = process.env.PORT || 3000
-var password = "poop"; // No password by default
+var password = ""; // No password by default
 
 const express = require('express');
 
