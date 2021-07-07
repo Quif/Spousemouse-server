@@ -14,8 +14,8 @@ io.on('connection', (socket) => {
     socket.on('roomID', function(ID){
         roomID = ID
         connections.push([socket.id, ID])
-        console.log(connections)
     })
+    
     socket.on('mouseMovement', function(data){
         connections.forEach(user => function(){
             if(user[1] == connections[connections.length-1][1] && user[0] != connections[connections.length-1][0]){
@@ -25,6 +25,7 @@ io.on('connection', (socket) => {
             }
     })
     });
+
     socket.on('wave', function(){
         connections.forEach(user => function(){
             if(user[1] == connections[connections.length-1][1] && user[0] != connections[connections.length-1][0]){
@@ -32,6 +33,7 @@ io.on('connection', (socket) => {
     }
 })
     })
+
     socket.on('disconnected', (evt) => {
         connections.forEach(user => function(){
             if(user[1] == connections[connections.length-1][1] && user[0] != connections[connections.length-1][0]){
@@ -39,11 +41,11 @@ io.on('connection', (socket) => {
     }
 })
     })
-    connections.forEach(user => function(){
-        console.log(user)
-        console.log("SHITRwereWQ")
+
+    for(var i = 0; i < connections.length; i++){
+        console.log("a")
         if(user[1] == connections[connections.length-1][1] && user[0] != connections[connections.length-1][0]){
     socket.to(user[0]).emit('online')
         }
-    })
+    }
 })
