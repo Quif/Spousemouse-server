@@ -43,7 +43,8 @@ io.on('connection', (socket) => {
     })
 
     for(var i = 0; i < connections.length; i++){
-        console.log("a")
+        console.log(connections[connections.length-1][1])
+        console.log(connections[i][1])
         if(connections[i][1] == connections[connections.length-1][1] && connections[i][0] != connections[connections.length-1][0]){
     socket.to(user[0]).emit('online')
         }
