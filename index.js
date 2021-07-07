@@ -40,6 +40,7 @@ io.on('connection', (socket) => {
 })
     })
     connections.forEach(user => function(){
+        console.log(user)
         if(user[1] == connections[connections.length-1][1] && user[0] != connections[connections.length-1][0]){
     socket.to(user[0]).emit('online')
         }
