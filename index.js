@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
       }
     }
   });
-
+  setTimeout(function(){
   for (var i = 0; i < connections.length; i++) {
     console.log(connections);
     if (
@@ -62,4 +62,5 @@ io.on("connection", (socket) => {
       socket.to(connections[i][0]).emit("online");
     }
   }
+},200)
 });
