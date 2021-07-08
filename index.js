@@ -16,6 +16,14 @@ io.on("connection", (socket) => {
     roomID = ID;
     connections.push([socket.id, ID]);
     console.log("New connection under ID " + roomID + "!");
+    for (var i = 0; i < connections.length; i++) {
+      if (
+        connections[i][1] == connections[connections.length - 1][1] &&
+        connections[i][0] != socket.id
+      ) {
+        socket.to(connections[i][0]).emit("online");
+      }
+    }
   });
 
   socket.on("mouseMovement", function (data) {
@@ -52,14 +60,4 @@ io.on("connection", (socket) => {
     }
     console.log(connections)
   });
-
-  for (var i = 0; i < connections.length; i++) {
-      console.log(connections[i][0] + socket.id + connections[i][0] != socket.id)
-    if (
-      connections[i][1] == connections[connections.length - 1][1] &&
-      connections[i][0] != socket.id
-    ) {
-      socket.to(connections[i][0]).emit("online");
-    }
-  }
 });
