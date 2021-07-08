@@ -1,5 +1,6 @@
 // SETTINGS
 var port = process.env.PORT || 3000;
+var 
 
 const express = require("express");
 
@@ -12,6 +13,9 @@ const io = require("socket.io")(server);
 var connections = [];
 io.on("connection", (socket) => {
   var roomID;
+
+io.to(socket.id).emit("updateUsers", connections)
+
   socket.on("roomID", function (ID) {
     roomID = ID;
     connections.push([socket.id, ID]);
@@ -52,12 +56,10 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", (evt) => {
     console.log("Someone disconnected from ID " + roomID + "!");
-    console.log(connections)
     for (var i = 0; i < connections.length; i++) {
         if(connections[i][0] == socket.id){
             connections.splice(i, 1)
         }
     }
-    console.log(connections)
   });
 });
