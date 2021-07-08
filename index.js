@@ -1,6 +1,5 @@
 // SETTINGS
 var port = process.env.PORT || 3000;
-var 
 
 const express = require("express");
 
@@ -14,18 +13,17 @@ var connections = [];
 io.on("connection", (socket) => {
   var roomID;
 
-io.to(socket.id).emit("updateUsers", connections)
-
   socket.on("roomID", function (ID) {
     roomID = ID;
     connections.push([socket.id, ID]);
+    io.to(socket.id).emit("updateUsers", connections)
     console.log("New connection under ID " + roomID + "!");
     for (var i = 0; i < connections.length; i++) {
       if (
         connections[i][1] == connections[connections.length - 1][1] &&
         connections[i][0] != socket.id
       ) {
-        socket.to(connections[i][0]).emit("online");
+        io.to(connections[i][0]).emit("online");
       }
     }
   });
