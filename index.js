@@ -42,8 +42,13 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("disconnected", (evt) => {
-        console.log("disconnected");
+  socket.on("disconnect", (evt) => {
+    console.log("disconnected");
+    for (var i = 0; i < connections.length; i++) {
+        if(connections[i][0] == socket.id){
+            connections.splice(i, 1)
+        }
+    }
   });
 
   for (var i = 0; i < connections.length; i++) {
