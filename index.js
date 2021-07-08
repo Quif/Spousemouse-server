@@ -12,11 +12,10 @@ const io = require("socket.io")(server);
 var connections = [];
 io.on("connection", (socket) => {
   var roomID;
-  console.log("New connection under ID " + roomID + "!");
   socket.on("roomID", function (ID) {
     roomID = ID;
-    console.log(ID)
     connections.push([socket.id, ID]);
+    console.log("New connection under ID " + roomID + "!");
   });
 
   socket.on("mouseMovement", function (data) {
