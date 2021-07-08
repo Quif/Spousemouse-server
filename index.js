@@ -54,6 +54,7 @@ io.on("connection", (socket) => {
   });
 
   for (var i = 0; i < connections.length; i++) {
+      console.log(connections[i][0] + socket.id + connections[i][0] != socket.id)
     if (
       connections[i][1] == connections[connections.length - 1][1] &&
       connections[i][0] != socket.id
