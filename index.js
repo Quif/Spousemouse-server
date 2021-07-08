@@ -43,12 +43,14 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", (evt) => {
-    console.log("disconnected");
+    console.log("Someone disconnected from ID " + roomID + "!");
+    console.log(connections)
     for (var i = 0; i < connections.length; i++) {
         if(connections[i][0] == socket.id){
             connections.splice(i, 1)
         }
     }
+    console.log(connections)
   });
 
   for (var i = 0; i < connections.length; i++) {
