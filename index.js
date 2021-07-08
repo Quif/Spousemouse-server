@@ -1,4 +1,5 @@
 // SETTINGS
+var serverName = "My spousemouse server!"
 var port = process.env.PORT || 3000;
 
 const express = require("express");
@@ -16,7 +17,11 @@ io.on("connection", (socket) => {
   socket.on("roomID", function (ID) {
     roomID = ID;
     connections.push([socket.id, ID]);
-    io.to(socket.id).emit("updateUsers", connections)
+    var serverInfo = {
+      "name": serverName,
+      "onlineUsers": connections
+    }
+    io.to(socket.id).emit("serverInfo", serverInfo)
     console.log("New connection under ID " + roomID + "!");
     for (var i = 0; i < connections.length; i++) {
       if (
