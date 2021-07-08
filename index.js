@@ -12,7 +12,7 @@ const io = require("socket.io")(server);
 var connections = [];
 io.on("connection", (socket) => {
   var roomID;
-  console.log("New connection!");
+  console.log("New connection under ID " + roomID + "!");
   socket.on("roomID", function (ID) {
     roomID = ID;
     console.log(ID)
@@ -25,9 +25,9 @@ io.on("connection", (socket) => {
         connections[i][1] == connections[connections.length - 1][1] &&
         connections[i][0] != socket.id
       ) {
-        socket.broadcast.emit("mouseMovement", data);
-        socket.broadcast.emit("movementAlert");
-        console.log("New mouse movement!");
+        socket.to(connections[i][0]).emit("mouseMovement", data);
+        socket.to(connections[i][0]).emit("movementAlert");
+        console.log("New mouse movement under ID " + roomID + "!");
       }
     }
   });
@@ -38,23 +38,16 @@ io.on("connection", (socket) => {
         connections[i][1] == connections[connections.length - 1][1] &&
         connections[i][0] != socket.id
       ) {
-        socket.broadcast.emit("wave");
+        socket.to(connections[i][0]).emit("wave");
       }
     }
   });
 
   socket.on("disconnected", (evt) => {
-    for (var i = 0; i < connections.length; i++) {
-      if (
-        connections[i][1] == connections[connections.length - 1][1] &&
-        connections[i][0] != socket.id
-      ) {
         console.log("disconnected");
-      }
-    }
   });
+
   for (var i = 0; i < connections.length; i++) {
-    console.log(connections);
     if (
       connections[i][1] == connections[connections.length - 1][1] &&
       connections[i][0] != socket.id
