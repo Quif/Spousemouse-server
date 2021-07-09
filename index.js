@@ -61,15 +61,15 @@ io.on("connection", (socket) => {
     console.log("Someone disconnected from ID " + roomID + "!");
     var connectionss = connections
     for (var i = 0; i < connections.length; i++) {
-        if(connectionss[i][0] == socket.id){
-            connections.splice(i, 1)
-        }
         if (
           connectionss[i][1] == connectionss[connectionss.length - 1][1] &&
           connectionss[i][0] != socket.id
         ) {
           socket.to(connections[i][0]).emit("disconnected");
         }
+        if(connectionss[i][0] == socket.id){
+          connections.splice(i, 1)
+      }
     }
   });
 });
