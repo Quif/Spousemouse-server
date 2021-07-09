@@ -60,7 +60,7 @@ io.on("connection", (socket) => {
   socket.on("disconnect", (evt) => {
     console.log("Someone disconnected from ID " + roomID + "!");
     var connectionss = connections
-    or (var i = 0; i < connections.length; i++) {
+    for (var i = 0; i < connections.length; i++) {
         if(connectionss[i][0] == socket.id){
             connections.splice(i, 1)
         }
