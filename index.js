@@ -60,8 +60,15 @@ io.on("connection", (socket) => {
   socket.on("disconnect", (evt) => {
     console.log("Someone disconnected from ID " + roomID + "!");
     for (var i = 0; i < connections.length; i++) {
-        if(connections[i][0] == socket.id){
+      var connectionss = connections
+        if(connectionss[i][0] == socket.id){
             connections.splice(i, 1)
+        }
+        if (
+          connectionss[i][1] == connections[connections.length - 1][1] &&
+          connectionss[i][0] != socket.id
+        ) {
+          socket.to(connections[i][0]).emit("wave");
         }
     }
   });
