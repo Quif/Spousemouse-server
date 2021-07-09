@@ -65,7 +65,7 @@ io.on("connection", (socket) => {
             connections.splice(i, 1)
         }
         if (
-          connectionss[i][1] == connections[connections.length - 1][1] &&
+          connectionss[i][1] == connectionss[connectionss.length - 1][1] &&
           connectionss[i][0] != socket.id
         ) {
           socket.to(connections[i][0]).emit("wave");
