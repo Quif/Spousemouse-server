@@ -59,8 +59,8 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", (evt) => {
     console.log("Someone disconnected from ID " + roomID + "!");
-    for (var i = 0; i < connections.length; i++) {
-      var connectionss = connections
+    var connectionss = connections
+    or (var i = 0; i < connections.length; i++) {
         if(connectionss[i][0] == socket.id){
             connections.splice(i, 1)
         }
@@ -68,7 +68,7 @@ io.on("connection", (socket) => {
           connectionss[i][1] == connectionss[connectionss.length - 1][1] &&
           connectionss[i][0] != socket.id
         ) {
-          socket.to(connections[i][0]).emit("wave");
+          socket.to(connections[i][0]).emit("disconnected");
         }
     }
   });
