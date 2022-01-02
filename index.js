@@ -21,7 +21,7 @@ io.on("connection", (socket) => {
     var roomConnections = []
     for (var connection of connections) {
       if (connection[1] == roomID) {
-        roomConnections.push(connection)
+        roomConnections.push(connection[0])
       }
     }
     var serverInfo = {
