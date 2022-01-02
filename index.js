@@ -14,6 +14,7 @@ var connections = [];
 
 io.on("connection", (socket) => {
   var roomID;
+  var poop;
 
   socket.on("roomID", function (ID) {
     roomID = ID;
